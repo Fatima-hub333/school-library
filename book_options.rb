@@ -1,8 +1,8 @@
 require_relative 'rental_options'
 
 class BookOptions
-  attr_accessor :books
-  
+  attr_reader :books
+
   def initialize
     @books = []
   end
@@ -11,8 +11,9 @@ class BookOptions
     if @books.count.zero?
        puts "There is no book yet...\n"
     end
-
-    puts @books.length
+    @books.each do |book|
+      puts "[#{book.class}] Title: #{book.title} Author: #{book.author}"
+    end
   end
 
   def create_book
@@ -26,6 +27,5 @@ class BookOptions
     @books << book
 
     puts 'Book added successfully'
-    puts @books.length
   end
 end
