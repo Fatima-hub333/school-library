@@ -1,7 +1,7 @@
 require_relative 'rental_options'
 
 class BookOptions
-  attr_reader :books
+  attr_reader :books, :title, :author
 
   def initialize
     @books = []

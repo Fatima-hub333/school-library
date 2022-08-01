@@ -29,7 +29,8 @@ class PeopleOptions
       age = gets.chomp
       print "Parent permission [Y/N]: "
       pp = gets.chomp
-      pp = false if pp == "n" && pp = true if pp == "y"
+      pp = false if pp == "n" 
+      pp = true if pp == "y"
       student = Student.new(name, age, parent_permission: pp)
       @people.push(student)
       puts "Student created succesfully!"
