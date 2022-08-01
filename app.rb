@@ -23,6 +23,9 @@ class App
 
   def run
     #get_new = Option.new
+    @people_options = PeopleOptions.new
+    @book_options = BookOptions.new
+    @rental_options = RentalOptions.new
     puts 'Welcome to school library'
     loop do
       menu
@@ -35,10 +38,6 @@ class App
   end
 
   def get_option(option)
-    @people_options = PeopleOptions.new
-    @book_options = BookOptions.new
-    @rental_options = RentalOptions.new
-
     case option
     when '1'
       @book_options.list_all_books

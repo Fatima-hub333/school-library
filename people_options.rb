@@ -2,14 +2,19 @@ require "./student"
 require "./teacher"
 
 class PeopleOptions
-  attr_reader :person
-  def initialize 
+  attr_accessor :people
+
+  def initialize
     @people = []
   end
 
   def list_all_people
     if @people.count.zero?
        puts "There is not a person yet...\n"
+    end
+
+    @people.each do |person|
+      puts "[#{person.class}] ID: #{person.id} Name: #{person.name} Age: #{person.age}"
     end
   end
 
@@ -25,7 +30,7 @@ class PeopleOptions
       print "Parent permission [Y/N]: "
       pp = gets.chomp
       pp = false if pp == "n" && pp = true if pp == "y"
-      student = Student.new(age, name, parent_permission: pp)
+      student = Student.new(name, age, parent_permission: pp)
       @people.push(student)
       puts "Student created succesfully!"
     when "2"
