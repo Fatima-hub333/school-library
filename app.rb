@@ -37,7 +37,7 @@ class App
   end
 
   def storage
-    # @people_options = PeopleOptions.new
+    @people_options = PeopleOptions.new
     @book_options = BookOptions.new
     # @rental_options = RentalOptions.new(@book_options, @people_options)
   end
@@ -72,7 +72,11 @@ class App
     puts "\n"
   end
 
-  def save_book
-    @book_options.save_book
+  def save_books
+    @book_options.save_books
+  end
+
+  def save_persons
+    @people_options.save_persons
   end
 end

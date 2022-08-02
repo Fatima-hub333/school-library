@@ -52,4 +52,23 @@ class PeopleOptions
     @people.push(teacher)
     puts 'Teacher created succesfully!'
   end
+
+  def save_persons
+    # get stored book data as objects
+    data = []
+    @people.each do |person|
+      role = person.class
+      id = person.id
+      name = person.name
+      age = person.age
+      parent_permission = person.parent_permission
+      data.push({role: role, id: id, name: name, age: age, parent_permission: parent_permission})
+    end
+    # check if file exists
+    if !File.exists?("./people.json")
+      File.new("./people.json", "w+")
+    end
+    # serialize array to json
+    File.open("people.json", "w") { |f| f.puts data.to_json }
+  end
 end

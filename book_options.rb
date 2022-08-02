@@ -28,7 +28,7 @@ class BookOptions
     puts 'Book added successfully'
   end
 
-  def save_book
+  def save_books
     # get stored book data as objects
     data = []
     @books.each do |book|
