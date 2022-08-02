@@ -36,6 +36,10 @@ class BookOptions
       author = book.author
       data.push({title: title, author: author})
     end
+    # check if file exists
+    if !File.exists?("./books.json")
+      File.new("./books.json", "w+")
+    end
     # serialize array to json
     File.open("books.json", "w") { |f| f.puts data.to_json }
   end
