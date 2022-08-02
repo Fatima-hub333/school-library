@@ -22,7 +22,7 @@ class App
   end
 
   def run
-    #get_new = Option.new
+    # get_new = Option.new
     @people_options = PeopleOptions.new
     @book_options = BookOptions.new
     @rental_options = RentalOptions.new(@book_options, @people_options)
@@ -62,5 +62,4 @@ class App
     @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     sleep 0.75
   end
-  
 end

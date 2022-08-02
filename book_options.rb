@@ -8,9 +8,7 @@ class BookOptions
   end
 
   def list_all_books
-    if @books.count.zero?
-       puts "There is no book yet...\n"
-    end
+    puts "There is no book yet...\n" if @books.count.zero?
     @books.each do |book|
       puts "[#{book.class}] Title: #{book.title} Author: #{book.author}"
     end

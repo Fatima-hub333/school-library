@@ -2,8 +2,8 @@ require_relative './book_options'
 require_relative './people_options'
 require_relative 'rental'
 
-class RentalOptions 
-  attr_accessor :books, :persons 
+class RentalOptions
+  attr_accessor :books, :persons
 
   def initialize(books, persons)
     @rentals = []
@@ -18,11 +18,13 @@ class RentalOptions
     book_obj = @books[book_number.to_i]
 
     puts "Select a person from the following list:\n"
-    @persons.each_with_index { |person, index| puts "#{index} [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    @persons.each_with_index do |person, index|
+      puts "#{index} [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
+    end
     person_number = gets.chomp
     person_obj = @persons[person_number.to_i]
 
-    print "Date: "
+    print 'Date: '
     date = gets.chomp
     rental = Rental.new(date, book_obj, person_obj)
     @rentals << rental
