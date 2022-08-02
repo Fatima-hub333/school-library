@@ -31,7 +31,7 @@ class PeopleOptions
       pp = gets.chomp
       pp = false if pp == "n" 
       pp = true if pp == "y"
-      student = Student.new(name, age, parent_permission: pp)
+      student = Student.new(age, name, parent_permission: pp)
       @people.push(student)
       puts "Student created succesfully!"
     when "2"

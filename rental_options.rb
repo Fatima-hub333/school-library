@@ -24,7 +24,8 @@ class RentalOptions
 
     print "Date: "
     date = gets.chomp
-    Rental.new(date, book_obj, person_obj)
+    rental = Rental.new(date, book_obj, person_obj)
+    @rentals << rental
     print "Rental created succesfully!\n"
   end
 
