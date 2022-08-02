@@ -16,34 +16,40 @@ class PeopleOptions
     end
   end
 
-  # rubocop:disable Metrics/MethodLength
   def create_person
     print 'Do you want to create student (1) or teacher (2): '
     type_of_person = gets.chomp
     case type_of_person
     when '1'
-      print 'Name: '
-      name = gets.chomp
-      print 'Age: '
-      age = gets.chomp
-      print 'Parent permission [Y/N]: '
-      pp = gets.chomp
-      pp = false if pp == 'n'
-      pp = true if pp == 'y'
-      student = Student.new(age, name, parent_permission: pp)
-      @people.push(student)
-      puts 'Student created succesfully!'
+      student
     when '2'
-      print 'Name: '
-      name = gets.chomp
-      print 'Age: '
-      age = gets.chomp
-      print 'Specialization: '
-      special = gets.chomp
-      teacher = Teacher.new(special, age, name)
-      @people.push(teacher)
-      puts 'Teacher created succesfully!'
+      teacher
     end
   end
-  # rubocop:enable Metrics/MethodLength
+
+  def student
+    print 'Name: '
+    name = gets.chomp
+    print 'Age: '
+    age = gets.chomp
+    print 'Parent permission [Y/N]: '
+    pp = gets.chomp
+    pp = false if pp == 'n'
+    pp = true if pp == 'y'
+    student = Student.new(age, name, parent_permission: pp)
+    @people.push(student)
+    puts 'Student created succesfully!'
+  end
+
+  def teacher
+    print 'Name: '
+    name = gets.chomp
+    print 'Age: '
+    age = gets.chomp
+    print 'Specialization: '
+    special = gets.chomp
+    teacher = Teacher.new(special, age, name)
+    @people.push(teacher)
+    puts 'Teacher created succesfully!'
+  end
 end

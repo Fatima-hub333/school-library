@@ -21,45 +21,54 @@ class App
     puts '7 - Exit'
   end
 
-  def run
-    # get_new = Option.new
+  def greeter
+    puts "Welcome to school library!\n\n"
+  end
+
+  def instructions
+    puts 'Please choose an option by entering a number'
+    puts '1 - List all books'
+    puts '2 - List all people'
+    puts '3 - Create a person'
+    puts '4 - Create a book'
+    puts '5 - Create a rental'
+    puts '6 - List all rentals for a given person id'
+    puts '7 - Exit'
+  end
+
+  def storage
     @people_options = PeopleOptions.new
     @book_options = BookOptions.new
     @rental_options = RentalOptions.new(@book_options, @people_options)
-    puts 'Welcome to school library'
-    loop do
-      menu
-      option = gets.chomp
-      break if option == '7'
-
-      get_option(option)
-    end
-    puts 'Thank you for using our library!'
-  end
-
-  def get_option(option)
-    case option
-    when '1'
-      @book_options.list_all_books
-    when '2'
-      @people_options.list_all_people
-    when '3'
-      @people_options.create_person
-    when '4'
-      @book_options.create_book
-    when '5'
-      @rental_options.create_rental
-    when '6'
-      @rental_options.list_rentals_by_person_id
-    else
-      puts 'Thank you for using this App!'
-    end
   end
 
   def list_all_books
-    puts 'There are no books yet!.' if @books.empty?
+    @book_options.list_all_books
+    puts "\n"
+  end
 
-    @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
-    sleep 0.75
+  def list_all_people
+    @people_options.list_all_people
+    puts "\n"
+  end
+
+  def create_person
+    @people_options.create_person
+    puts "\n"
+  end
+
+  def create_book
+    @book_options.create_book
+    puts "\n"
+  end
+
+  def create_rental
+    @rental_options.create_rental
+    puts "\n"
+  end
+
+  def list_rentals_by_person_id
+    @rental_options.list_rentals_by_person_id
+    puts "\n"
   end
 end
