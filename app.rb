@@ -37,9 +37,9 @@ class App
   end
 
   def storage
-    @people_options = PeopleOptions.new
+    # @people_options = PeopleOptions.new
     @book_options = BookOptions.new
-    @rental_options = RentalOptions.new(@book_options, @people_options)
+    # @rental_options = RentalOptions.new(@book_options, @people_options)
   end
 
   def list_all_books
@@ -70,5 +70,9 @@ class App
   def list_rentals_by_person_id
     @rental_options.list_rentals_by_person_id
     puts "\n"
+  end
+
+  def save_book
+    @book_options.save_book
   end
 end

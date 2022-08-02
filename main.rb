@@ -10,6 +10,7 @@ def main
     input = gets.chomp
     options(input, app)
   end
+  app.save_book
 end
 
 def options(input, app)

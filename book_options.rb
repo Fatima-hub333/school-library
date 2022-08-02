@@ -1,4 +1,5 @@
 require_relative 'rental_options'
+require 'json'
 
 class BookOptions
   attr_reader :books, :title, :author
@@ -25,5 +26,17 @@ class BookOptions
     @books << book
 
     puts 'Book added successfully'
+  end
+
+  def save_book
+    # get stored book data as objects
+    data = []
+    @books.each do |book|
+      title = book.title
+      author = book.author
+      data.push({title: title, author: author})
+    end
+    # serialize array to json
+    File.open("books.json", "w") { |f| f.puts data.to_json }
   end
 end
