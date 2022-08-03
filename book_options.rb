@@ -5,54 +5,45 @@ class BookOptions
   attr_reader :books, :title, :author
 
   def initialize
-    @books = []
+    if !File.exists?("./books.json")
+      File.new("./books.json", "w+")
+      File.write("./books.json", [])
+    end
+    books_file = File.read("./books.json")
+    books_data = JSON.parse(books_file)
+    @books = books_data
   end
 
   def list_all_books
-    if !File.exists?("./books.json") && @books.count.zero?
-      puts "There is no book yet...\n" 
-    elsif File.exists?("./books.json")    
       books_file = File.read("./books.json")
       books_data = JSON.parse(books_file)
       if !books_data.count.zero?
         books_data.each do |book| 
           puts "[Book] Title: #{book['title']}  Author: #{book['author']}"
         end
+      else
+      puts "There is no book yet...\n" 
       end
-    else
-      @books.each do |book|
-        puts "[#{book.class}] Title: #{book.title} Author: #{book.author}"
-      end
-    end
   end
   
   def create_book
     print 'Title: '
     title = gets.chomp
-
     print 'Author: '
     author = gets.chomp
-
     book = Book.new(title, author)
-    @books << book
-
-    puts 'Book added successfully'
+    @books << {"title"=>"#{book.title}", "author"=>"#{book.author}"}
     save_books
+    puts 'Book added successfully'
   end
 
   def save_books
-    # get stored book data as objects
     data = []
     @books.each do |book|
-      title = book.title
-      author = book.author
-      data.push({title: title, author: author})
+      title = book['title']
+      author = book['author']
+      data << ({title: book['title'], author: book['author']})
     end
-    # check if file exists
-    if !File.exists?("./books.json")
-      File.new("./books.json", "w+")
-    end
-    # serialize array to json
     File.open("books.json", "w") { |f| f.puts data.to_json }
   end
 end
