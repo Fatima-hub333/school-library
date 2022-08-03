@@ -25,7 +25,8 @@ class RentalOptions
       author = book['author']
       puts "#{index} Title: #{title}, Author: #{author}"
       book_number = gets.chomp
-      book_obj = @books[book_number.to_i]
+      book_hash = @books[book_number.to_i]
+      book_obj = Book.new(book_hash['title'], book_hash['author'])
 
       puts "Select a person from the following list:\n"
       @persons.each_with_index do |person, index|
@@ -33,32 +34,17 @@ class RentalOptions
       age = person['age']
       puts "#{index} Name: #{name}, Age: #{age}"
       person_number = gets.chomp
-      person_obj = @persons[person_number.to_i]
+      person_hash = @persons[person_number.to_i]
+      person_obj = Person.new(person_hash['age'], person_hash['name'])
+
       print 'Date: '
       date = gets.chomp
       rental = Rental.new(date, book_obj, person_obj)
       @rentals << rental
+      save_rentals
       print "Rental created succesfully!\n"
+      end
     end
-  end
-
-
-  #   @books.each_with_index { |book, index| puts "#{index} Title: #{book.title} Author: #{book.author}" }
-  #   book_number = gets.chomp
-  #   book_obj = @books[book_number.to_i]
-
-  #   puts "Select a person from the following list:\n"
-  #   @persons.each_with_index do |person, index|
-  #     puts "#{index} [#{person.class}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"
-  #   end
-  #   person_number = gets.chomp
-  #   person_obj = @persons[person_number.to_i]
-
-  #   print 'Date: '
-  #   date = gets.chomp
-  #   rental = Rental.new(date, book_obj, person_obj)
-  #   @rentals << rental
-  #   print "Rental created succesfully!\n"
   end
 
   def list_rentals_by_person_id
@@ -69,5 +55,13 @@ class RentalOptions
     @rentals.each do |rental|
       puts "Date: #{rental.date}, Book '#{rental.book.title}' by #{rental.book.author}" if rental.person.id == id
     end
+  end
+
+  def save_rentals
+    data = []
+    @rentals.each do |rental|
+      data << ({date: rental.date, title: rental.book.title, author: rental.book.author, person: rental.person.name })
+    end
+    File.open("rentals.json", "w") { |f| f.puts data.to_json }
   end
 end
