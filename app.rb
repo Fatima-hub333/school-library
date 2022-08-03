@@ -9,18 +9,6 @@ require_relative 'book_options'
 require_relative 'rental_options'
 
 class App
-  def menu
-    puts
-    puts 'Please choose an option by entering a number'
-    puts '1 - List all books'
-    puts '2 - List all people'
-    puts '3 - Create a person'
-    puts '4 - Create a book'
-    puts '5 - Create a rental'
-    puts '6 - List all rentals for a given person id'
-    puts '7 - Exit'
-  end
-
   def greeter
     puts "Welcome to school library!\n\n"
   end
@@ -39,7 +27,7 @@ class App
   def storage
     @people_options = PeopleOptions.new
     @book_options = BookOptions.new
-    @rental_options = RentalOptions.new(@book_options, @people_options)
+    @rental_options = RentalOptions.new
   end
 
   def list_all_books
@@ -70,5 +58,13 @@ class App
   def list_rentals_by_person_id
     @rental_options.list_rentals_by_person_id
     puts "\n"
+  end
+
+  def save_books
+    @book_options.save_books
+  end
+
+  def save_persons
+    @people_options.save_persons
   end
 end

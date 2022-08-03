@@ -10,6 +10,8 @@ def main
     input = gets.chomp
     options(input, app)
   end
+  puts
+  puts "Thanks for using Library App!\n\n"
 end
 
 def options(input, app)
