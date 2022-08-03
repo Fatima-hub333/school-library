@@ -9,10 +9,17 @@ class PeopleOptions
   end
 
   def list_all_people
-    puts "There is not a person yet...\n" if @people.count.zero?
-
-    @people.each do |person|
-      puts "[#{person.class}] ID: #{person.id} Name: #{person.name} Age: #{person.age}"
+    if File.exists?("./people.json")
+      people_file = File.read("./people.json")
+      people_data = JSON.parse(people_file)
+      people_data.each do |person|
+        puts "[#{person['role']}] ID: #{person['id']} Name: #{person['name']}  Age: #{person['age']}"
+      end
+    else
+      puts "There is not a person yet...\n" if @people.count.zero?
+      @people.each do |person|
+        puts "[#{person.class}] ID: #{person.id} Name: #{person.name} Age: #{person.age}"
+      end
     end
   end
 

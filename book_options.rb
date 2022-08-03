@@ -9,7 +9,6 @@ class BookOptions
   end
 
   def list_all_books
-    # parse and list books from json if exists
     if File.exists?("./books.json")
       books_file = File.read("./books.json")
       books_data = JSON.parse(books_file)
