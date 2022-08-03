@@ -39,7 +39,7 @@ class App
   def storage
     @people_options = PeopleOptions.new
     @book_options = BookOptions.new
-    @rental_options = RentalOptions.new(@book_options, @people_options)
+    @rental_options = RentalOptions.new
   end
 
   def list_all_books
