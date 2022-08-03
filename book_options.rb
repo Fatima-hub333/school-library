@@ -40,8 +40,6 @@ class BookOptions
   def save_books
     data = []
     @books.each do |book|
-      title = book['title']
-      author = book['author']
       data << ({title: book['title'], author: book['author']})
     end
     File.open("books.json", "w") { |f| f.puts data.to_json }
