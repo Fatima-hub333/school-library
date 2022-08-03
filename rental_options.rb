@@ -1,3 +1,4 @@
+# rubocop:disable all
 require_relative './book_options'
 require_relative './people_options'
 require_relative 'rental'
@@ -6,23 +7,22 @@ class RentalOptions
   attr_accessor :books, :persons
 
   def initialize
-    if !File.exists?("./rentals.json")
-      File.new("./rentals.json", "w+")
-      File.write("./rentals.json", [])
+    unless File.exist?('./rentals.json')
+      File.new('./rentals.json', 'w+')
+      File.write('./rentals.json', [])
     end
-    rentals_file = File.read("./rentals.json")
+    rentals_file = File.read('./rentals.json')
     rentals_data = JSON.parse(rentals_file)
     @rentals = rentals_data
-    books_file = File.read("./books.json")
+    books_file = File.read('./books.json')
     books_data = JSON.parse(books_file)
     @books = books_data
-    people_file = File.read("./people.json")
+    people_file = File.read('./people.json')
     people_data = JSON.parse(people_file)
-    @persons = people_data 
+    @persons = people_data
   end
 
   def create_rental
-    data = []
     puts "Select a book from the following list:\n"
     @books.each_with_index do |book, index|
       title = book['title']
@@ -48,9 +48,9 @@ class RentalOptions
     print 'Date: '
     date = gets.chomp
     rental = Rental.new(date, book_obj, person_obj, person_hash)
-    @rentals << {"date"=>"#{rental.date}", "title"=>"#{rental.book.title}", 
-                 "author"=>"#{rental.book.author}", "person"=>"#{rental.person.name}", 
-                 "id"=>"#{rental.person_id}", "role"=>"#{rental.person_role}"}
+    @rentals << { 'date' => rental.date.to_s, 'title' => rental.book.title.to_s,
+                  'author' => rental.book.author.to_s, 'person' => rental.person.name.to_s,
+                  'id' => rental.person_id.to_s, 'role' => rental.person_role.to_s }
     save_rentals
     print "Rental created succesfully!\n"
   end
@@ -60,10 +60,8 @@ class RentalOptions
     id = gets.chomp
     puts 'Rentals:'
     @rentals.each do |rental|
-      if rental['role']
-      puts "Date: #{rental['date']} Title: #{rental['title']} by #{rental['author']} [#{rental['role']}] Name: #{rental['person']} ID: #{rental['id']}" if "#{rental['id']}" == id
-      else
-      puts "Date: #{rental['date']} Title: #{rental['title']} by #{rental['author']} [Student] Name: #{rental['person']} ID: #{rental['id']}" if "#{rental['id']}" == id
+      if (rental['id']).to_s == id
+        puts "Date: #{rental['date']} Title: #{rental['title']} by #{rental['author']} [#{rental['role']}] Name: #{rental['person']} ID: #{rental['id']}"
       end
     end
   end
@@ -71,8 +69,9 @@ class RentalOptions
   def save_rentals
     data = []
     @rentals.each do |rental|
-      data << ({date: rental['date'], title: rental['title'], author: rental['author'], person: rental['person'], id: rental['id']})
+      data << ({ date: rental['date'], title: rental['title'], author: rental['author'], person: rental['person'],
+                 id: rental['id'], role: rental['role'] })
     end
-    File.open("rentals.json", "w") { |f| f.puts data.to_json }
+    File.open('rentals.json', 'w') { |f| f.puts data.to_json }
   end
 end
