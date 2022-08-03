@@ -69,7 +69,7 @@ class PeopleOptions
     save_teacher
   end
 
-  def save_students
+  def save_student
     data = []
     @people.each do |person|
       role = person['role']
