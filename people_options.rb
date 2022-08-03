@@ -9,9 +9,9 @@ class PeopleOptions
   end
 
   def list_all_people
-    if File.exists?("./people.json")
       people_file = File.read("./people.json")
       people_data = JSON.parse(people_file)
+    if people_data.length != 0
       people_data.each do |person|
         puts "[#{person['role']}] ID: #{person['id']} Name: #{person['name']}  Age: #{person['age']}"
       end
@@ -46,6 +46,7 @@ class PeopleOptions
     student = Student.new(age, name, parent_permission: pp)
     @people.push(student)
     puts 'Student created succesfully!'
+    save_persons
   end
 
   def teacher
@@ -58,6 +59,7 @@ class PeopleOptions
     teacher = Teacher.new(special, age, name)
     @people.push(teacher)
     puts 'Teacher created succesfully!'
+    save_persons
   end
 
   def save_persons
