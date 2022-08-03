@@ -9,17 +9,20 @@ class BookOptions
   end
 
   def list_all_books
+    if !File.exists?("./books.json") && @books.count.zero?
+      puts "There is no book yet...\n" 
+    elsif File.exists?("./books.json")    
       books_file = File.read("./books.json")
       books_data = JSON.parse(books_file)
-    if books_data.length != 0 
-      books_data.each do |book|
-        puts "[Book] Title: #{book['title']}  Author: #{book['author']}"
+      if !books_data.count.zero?
+        books_data.each do |book| 
+          puts "[Book] Title: #{book['title']}  Author: #{book['author']}"
+        end
       end
     else
-      puts "There is no book yet...\n" if @books.count.zero?
-      # @books.each do |book|
-      #   puts "[#{book.class}] Title: #{book.title} Author: #{book.author}"
-      # end
+      @books.each do |book|
+        puts "[#{book.class}] Title: #{book.title} Author: #{book.author}"
+      end
     end
   end
   

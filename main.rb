@@ -10,8 +10,8 @@ def main
     input = gets.chomp
     options(input, app)
   end
-  app.save_books
-  app.save_persons
+  # app.save_books
+  # app.save_persons
 end
 
 def options(input, app)
