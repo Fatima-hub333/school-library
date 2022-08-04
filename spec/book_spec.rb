@@ -2,9 +2,9 @@ require "book"
 
 describe Book do
   context "To instantiate a book" do
-    Title = 'Fight Club'
-    Author = 'Palaniuk'
-    let(:book) { Book.new(Title, Author)}
+    title = 'Fight Club'
+    author = 'Palaniuk'
+    let(:book) { Book.new(title, author)}
 
     it "can add the title to the book" do
       expect(book.title).to eq('Fight Club')

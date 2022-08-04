@@ -2,10 +2,10 @@ require "person"
 
 describe Person do
   context "To instantiate a book" do
-    Name = 'Fatima'
-    Age = '25'
-    Parent_Permission = true
-    let(:person) { Person.new(Age, Name, Parent_Permission)}
+    name = 'Fatima'
+    age = '25'
+    parent_permission = true
+    let(:person) { Person.new(age, name, parent_permission)}
 
     it "can add the name to the person" do
       expect(person.name).to eq('Fatima')
